@@ -1,81 +1,85 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import Pagination from "@mui/material/Pagination";
 import BlogCard from "@/components/ui/Blogcard";
+import { useUser } from "@/app/lib/hooks/useUser";
+import { getAllBlogPosts } from "./services";
 
-const blogPosts = [
-  { id: "1", title: "Post 1", content: "Lorem ipsum...", author: { name: "Anees", id: "author-1" }, createdAt: "2025-08-20", updatedAt: "2025-08-25", href: "/blog/1" },
-  { id: "2", title: "Post 2", content: "Lorem ipsum...", author: { name: "Sarah", id: "author-2" }, createdAt: "2025-08-10", updatedAt: "2025-08-10", href: "/blog/2" },
-  { id: "3", title: "Post 3", content: "Lorem ipsum...", author: { name: "David", id: "author-3" }, createdAt: "2025-08-01", updatedAt: "2025-08-18", href: "/blog/3" },
-  { id: "4", title: "Post 4", content: "Lorem ipsum...", author: { name: "John", id: "author-4" }, createdAt: "2025-07-22", updatedAt: "2025-07-25", href: "/blog/4" },
-  { id: "5", title: "Post 5", content: "Lorem ipsum...", author: { name: "Maya", id: "author-5" }, createdAt: "2025-07-15", updatedAt: "2025-07-15", href: "/blog/5" },
-  { id: "6", title: "Post 6", content: "Lorem ipsum...", author: { name: "Liam", id: "author-6" }, createdAt: "2025-07-01", updatedAt: "2025-07-05", href: "/blog/6" },
-  { id: "7", title: "Post 7", content: "Lorem ipsum...", author: { name: "Sophia", id: "author-7" }, createdAt: "2025-06-20", updatedAt: "2025-06-25", href: "/blog/7" },
-  { id: "8", title: "Post 8", content: "Lorem ipsum...", author: { name: "Alex", id: "author-8" }, createdAt: "2025-06-10", updatedAt: "2025-06-12", href: "/blog/8" },
-];
-
-export default function BlogCarousel() {
-  const [startIndex, setStartIndex] = useState(0);
+export default function BlogPagination() {
+  const [page, setPage] = useState(1);
   const postsPerPage = 6;
 
-  const visiblePosts = blogPosts.slice(startIndex, startIndex + postsPerPage);
 
-  const handlePrev = () => {
-    setStartIndex((prev) => Math.max(prev - postsPerPage, 0));
+  const { data,  error } = useQuery({
+    queryKey: ["blogs", page],
+    queryFn: () => getAllBlogPosts({ page, limit: postsPerPage }),
+  });
+
+  const totalPages = Math.ceil((data?.totalCount || 0) / postsPerPage) || 1;
+  const visiblePosts = data?.items || [];
+
+  const handlePageChange = (event: React.ChangeEvent<unknown>, newPage: number) => {
+    setPage(newPage);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleNext = () => {
-    setStartIndex((prev) =>
-      Math.min(prev + postsPerPage, blogPosts.length - postsPerPage)
-    );
-  };
+
+
+  if (error) return <div className="text-center text-red-500">Error: {error.message}</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 transition-colors duration-700 py-16 px-6 sm:px-10">
       <div className="max-w-7xl mx-auto">
-
         <div className="text-center mb-15">
           <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-600 to-purple-600 leading-tight">
-  Featured Blogs ✨
- </h1>
-
-        
+            Featured Blogs ✨
+          </h1>
         </div>
-
-
-        <div className="relative">
-          {/* Blog Grid */}
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-            {visiblePosts.map((post) => (
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+          {visiblePosts.length > 0 ? (
+            visiblePosts.map((post) => (
               <BlogCard
-                key={post.id}
+
+                key={post._id}
+                _id={post._id}
                 title={post.title}
                 content={post.content}
                 author={post.author}
                 createdAt={post.createdAt}
                 updatedAt={post.updatedAt}
-                href={post.href}
+                href={`/blog/${post._id}`}
               />
-            ))}
-          </div>
-
-          {/* Navigation Arrows */}
-          <button
-            onClick={handlePrev}
-            disabled={startIndex === 0}
-            className="absolute -left-17 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:scale-110 transition disabled:opacity-40"
-          >
-            <ChevronLeft className="w-6 h-6 text-indigo-600" />
-          </button>
-
-          <button
-            onClick={handleNext}
-            disabled={startIndex + postsPerPage >= blogPosts.length}
-            className="absolute -right-17 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:scale-110 transition disabled:opacity-40"
-          >
-            <ChevronRight className="w-6 h-6 text-indigo-600" />
-          </button>
+            ))
+          ) : (
+            <div className="text-center text-gray-600 dark:text-gray-400">No posts available.</div>
+          )}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handlePageChange}
+            color="primary"
+            className="custom-pagination"
+            sx={{
+              "& .MuiPaginationItem-root": {
+                color: "white",
+                background: "linear-gradient(to right, #4f46e5, #ec4899)",
+                borderRadius: "8px",
+                margin: "0 4px",
+                "&:hover": {
+                  background: "linear-gradient(to right, #5b21b6, #db2777)",
+                  transform: "scale(1.05)",
+                },
+                "&.Mui-selected": {
+                  background: "linear-gradient(to right, #7c3aed, #f472b6)",
+                  fontWeight: "bold",
+                },
+              },
+            }}
+          />
         </div>
       </div>
     </div>
