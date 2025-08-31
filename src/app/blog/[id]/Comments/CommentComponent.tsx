@@ -7,7 +7,6 @@ import { usePost } from "@/app/lib/hooks/usePost";
 import { getComments, createComment, deleteComment } from "../../services";
 import { toast } from "react-toastify";
 import { Trash2 } from "lucide-react";
-import Image from "next/image";
 
 
 
@@ -95,7 +94,7 @@ export default function Comments() {
                             key={comment._id}
                             className="flex gap-4 items-start bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-md p-4"
                         >
-                            <Image
+                            <img
                                 src={comment?.posterId?.avatar}
                                 alt={comment?.posterId?.name}
                                 className="w-10 h-10 rounded-full object-cover"

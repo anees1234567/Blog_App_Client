@@ -6,7 +6,6 @@ import { useUser } from "@/app/lib/hooks/useUser";
 import { useQuery } from "@tanstack/react-query";
 import { getAllBlogPosts } from "./service";
 import { usePost } from "../lib/hooks/usePost";
-import Image from "next/image";
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useUser();
@@ -44,7 +43,7 @@ export default function ProfilePage() {
           </Link>
 
           <div className="flex items-center gap-6 mb-8">
-            <Image
+            <img
               src={user.avatar|| "/avatars/default.jpg"}
               alt={user.name}
               className="w-24 h-24 rounded-full object-cover shadow-md"

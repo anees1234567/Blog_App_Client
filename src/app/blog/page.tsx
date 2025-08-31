@@ -15,7 +15,7 @@ export default function BlogPagination() {
     queryKey: ["blogs", page],
     queryFn: () => getAllBlogPosts({ page, limit: postsPerPage }),
      refetchOnMount: true, 
-    refetchOnWindowFocus: true,
+     refetchOnWindowFocus: true,
   });
 
   const totalPages = Math.ceil((data?.totalCount || 0) / postsPerPage) || 1;
@@ -25,6 +25,8 @@ export default function BlogPagination() {
     setPage(newPage);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+
 
   useEffect(() => {
   refetch(); 

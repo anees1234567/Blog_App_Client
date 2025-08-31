@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Calendar } from "lucide-react";
 import { Author } from "@/app/blog/type";
 import { usePost } from "../../hooks/usePost";
-import Image from "next/image";
 
 type BlogCardProps = {
   _id:string
@@ -65,7 +64,7 @@ const { setCurrentPost } = usePost();
           className="flex items-center gap-3 hover:opacity-80 transition"
         >
           {author.avatar && (
-            <Image
+            <img
               src={author.avatar}
               alt={author.name}
               className="w-10 h-10 rounded-full object-cover shadow-md"

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { BlogType } from "../type";
 import Comments from "./Comments/CommentComponent";
-import Image from "next/image";
+
 
 
 
@@ -78,7 +78,7 @@ export default function BlogDetailsPage() {
                     </h1>
 
                     <div className="flex items-center gap-4 mb-8 text-gray-600 dark:text-gray-300">
-                        <Image
+                        <img
                             src={post?.author.avatar as string}
                             alt={post?.author.name as string}
                             className="w-12 h-12 rounded-full object-cover shadow-md"
