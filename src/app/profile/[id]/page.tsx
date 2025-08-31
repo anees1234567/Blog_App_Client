@@ -10,7 +10,6 @@ import { getProfile, updateProfile } from "../service";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { usePost } from "@/app/lib/hooks/usePost";
 
 
 
@@ -22,11 +21,10 @@ type FormData= {
 
 export default function EditProfilePage() {
   const { user, isAuthenticated,loginUser  } = useUser();
-
-    const router=useRouter()
+ const router=useRouter()
   const params = useParams(); 
   const id = params?.id as string;
-     const { data,  error } = useQuery({
+     const { data } = useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(id as string ) ,
   });

@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "@mui/material/Pagination";
 import BlogCard from "@/components/ui/Blogcard";
-import { useUser } from "@/app/lib/hooks/useUser";
 import { getAllBlogPosts } from "./services";
 
 export default function BlogPagination() {

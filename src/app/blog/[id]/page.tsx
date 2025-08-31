@@ -8,16 +8,16 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteBlogPost } from "../services";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import { useEffect } from "react";
 import { BlogType } from "../type";
 import Comments from "./Comments/CommentComponent";
+import Image from "next/image";
 
 
 
 
 export default function BlogDetailsPage() {
     const { user } = useUser();
-    const { post, clearCurrentPost, setCurrentPost } = usePost()
+    const { post,  setCurrentPost } = usePost()
     const router = useRouter()
 
     const { mutate } = useMutation({
@@ -78,9 +78,9 @@ export default function BlogDetailsPage() {
                     </h1>
 
                     <div className="flex items-center gap-4 mb-8 text-gray-600 dark:text-gray-300">
-                        <img
-                            src={post?.author.avatar}
-                            alt={post?.author.name}
+                        <Image
+                            src={post?.author.avatar as string}
+                            alt={post?.author.name as string}
                             className="w-12 h-12 rounded-full object-cover shadow-md"
                         />
                         <div>
@@ -104,7 +104,7 @@ export default function BlogDetailsPage() {
                         dangerouslySetInnerHTML={{ __html: post?.content as string }}
                     />
                 </article>
-                <Comments postId={post?._id as string} />
+                <Comments  />
             </div>
 
         </div>

@@ -1,7 +1,6 @@
 import { ENDPOINTS, Instance } from "@/constants";
 import { BlogType, CommentTypeList, saveBlogType } from "./type";
 
-Instance
 export async function createBlogPost(data:saveBlogType) {
 
     const response = await Instance.post(ENDPOINTS.CREATE_BLOG, data);

@@ -6,13 +6,13 @@ import { useUser } from "@/app/lib/hooks/useUser";
 import { useQuery } from "@tanstack/react-query";
 import { getAllBlogPosts } from "./service";
 import { usePost } from "../lib/hooks/usePost";
-import { useEffect } from "react";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useUser();
-  const {setCurrentPost,post}=usePost()
+  const {setCurrentPost}=usePost()
 
-    const { data=[],  error } = useQuery({
+    const { data=[]} = useQuery({
     queryKey: ["blogs"],
     queryFn: () => getAllBlogPosts(user?.id as string ) ,
   });
@@ -22,9 +22,7 @@ export default function ProfilePage() {
     return <div className="text-center text-red-500">Please log in to view your profile.</div>;
   }
 
-  useEffect(()=>{
-      console.log(post)
-  },[])
+ 
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10">
@@ -46,7 +44,7 @@ export default function ProfilePage() {
           </Link>
 
           <div className="flex items-center gap-6 mb-8">
-            <img
+            <Image
               src={user.avatar|| "/avatars/default.jpg"}
               alt={user.name}
               className="w-24 h-24 rounded-full object-cover shadow-md"

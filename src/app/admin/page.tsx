@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
-import { ArrowLeft, List, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, Pencil, Trash2 } from "lucide-react";
 import { useUser } from "@/app/lib/hooks/useUser";
 import { getAllUsers } from "./service";
 import { useRouter } from "next/navigation";
@@ -14,20 +14,7 @@ export default function AdminPage() {
   const router=useRouter()
   const queryClient = useQueryClient();
 
-if (!isAuthenticated || user?.role !== "Admin") {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 px-6 sm:px-10">
-      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-10 max-w-md text-center border border-red-300 dark:border-red-600">
-        <h1 className="text-3xl font-bold text-red-600 dark:text-red-400 mb-4">
-          Unauthorized
-        </h1>
-        <p className="text-gray-700 dark:text-gray-300 mb-6">
-          Only <span className="font-semibold">Admins</span> can access this page.
-        </p>
-      </div>
-    </div>
-  );
-}
+
 
 
   const { data, isLoading, error } = useQuery({
@@ -48,6 +35,21 @@ if (!isAuthenticated || user?.role !== "Admin") {
   const handleDelete = (id: string) => {
     deleteUser({id:id,isDeleted:true})
   };
+
+  if (!isAuthenticated || user?.role !== "Admin") {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 px-6 sm:px-10">
+      <div className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-10 max-w-md text-center border border-red-300 dark:border-red-600">
+        <h1 className="text-3xl font-bold text-red-600 dark:text-red-400 mb-4">
+          Unauthorized
+        </h1>
+        <p className="text-gray-700 dark:text-gray-300 mb-6">
+          Only <span className="font-semibold">Admins</span> can access this page.
+        </p>
+      </div>
+    </div>
+  );
+}
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 transition-colors duration-700 py-16 px-6 sm:px-10">
@@ -73,7 +75,7 @@ if (!isAuthenticated || user?.role !== "Admin") {
 
           {data??[].length > 0 ? (
             <div className="space-y-6">
-              {data?.map((data,index) => (
+              {data?.map((data:any,index:number) => (
                 <li
                   key={`${index}${data._id}`}
                   className="p-4 bg-white/50 dark:bg-gray-800/50 rounded-xl shadow-md hover:shadow-lg transition flex justify-between items-center"

@@ -2,8 +2,8 @@
 
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { UserPlus, ArrowLeft } from "lucide-react";
-import { loginService, registerService } from "../service";
+import { UserPlus} from "lucide-react";
+import {  registerService } from "../service";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

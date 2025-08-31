@@ -1,29 +1,19 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useUser } from "@/app/lib/hooks/useUser";
 import { usePost } from "@/app/lib/hooks/usePost";
 import { getComments, createComment, deleteComment } from "../../services";
 import { toast } from "react-toastify";
 import { Trash2 } from "lucide-react";
+import Image from "next/image";
 
-type CommentType = {
-    _id: string;
-    posterId: {
-        _id: string;
-        name: string;
-        avatar: string;
-    };
-    commentText: string;
-    createdAt: string;
-};
 
-type CommentsProps = {
-    postId: string;
-};
 
-export default function Comments({ postId }: CommentsProps) {
+
+
+export default function Comments() {
     const { user } = useUser();
     const { post } = usePost();
     const [newComment, setNewComment] = useState("");
@@ -105,7 +95,7 @@ export default function Comments({ postId }: CommentsProps) {
                             key={comment._id}
                             className="flex gap-4 items-start bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-md p-4"
                         >
-                            <img
+                            <Image
                                 src={comment?.posterId?.avatar}
                                 alt={comment?.posterId?.name}
                                 className="w-10 h-10 rounded-full object-cover"

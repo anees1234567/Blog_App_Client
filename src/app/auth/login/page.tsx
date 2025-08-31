@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import Link from "next/link";
-import { LogIn, ArrowLeft } from "lucide-react";
+import { LogIn } from "lucide-react";
 import { loginService } from "../service";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -43,7 +43,7 @@ export default function LoginPage() {
 
   useEffect(()=>{
     logoutUser()
-  },[])
+  },[logoutUser])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10 flex items-center justify-center">
