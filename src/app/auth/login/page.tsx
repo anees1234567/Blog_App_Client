@@ -32,7 +32,7 @@ export default function LoginPage() {
    const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:any)=>{
         if(data?.responseIndicator=="success"){
             loginUser(data?.response)
-            router.push("/")
+            router.push("/blog")
         }else{
             toast.error("user Login failed")
         }
