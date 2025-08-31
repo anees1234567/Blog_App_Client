@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 export default function LoginPage() {
     const router = useRouter();
-    const {loginUser,isAuthenticated,logoutUser}=useUser()
+    const {loginUser,logoutUser}=useUser()
 
   const {
     register,

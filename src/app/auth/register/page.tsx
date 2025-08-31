@@ -34,15 +34,14 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10 flex items-center justify-center">
       <div className="max-w-md w-full mx-auto">
-       
-        {/* Register Card */}
+    
         <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-2xl p-8 md:p-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-600 to-purple-600 mb-8 text-center">
             Register
           </h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Email Field */}
+
             <div>
               <label
                 htmlFor="email"
@@ -68,7 +67,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Password Field */}
+
             <div>
               <label
                 htmlFor="password"
@@ -94,7 +93,6 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Name Field */}
             <div>
               <label
                 htmlFor="name"
@@ -113,7 +111,6 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-full text-white bg-gradient-to-r from-indigo-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 shadow-md hover:shadow-lg transition hover:scale-105"

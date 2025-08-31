@@ -1,7 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
+import storage from "redux-persist/lib/storage"; 
 import { persistReducer, persistStore } from "redux-persist";
-import thunk from "redux-thunk";
 
 import userReducer from "./slices/userSlice";
 import postReducer from "./slices/postSlice";
@@ -10,7 +9,7 @@ import postReducer from "./slices/postSlice";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "post"], // choose which slices you want to persist
+  whitelist: ["user", "post"], 
 };
 
 const rootReducer = combineReducers({

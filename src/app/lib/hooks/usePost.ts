@@ -10,7 +10,6 @@ export const usePost = () => {
   const dispatch = useDispatch<AppDispatch>();
   const post = useSelector((state: RootState) => state.post.post);
 
-  // Set a post (for editing)
   const setCurrentPost = (postData: BlogType) => {
     dispatch(setPost(postData));
   };

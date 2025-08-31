@@ -65,7 +65,7 @@ export default function BlogForm() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10">
       <div className="max-w-2xl mx-auto">
-        {/* Back Button */}
+     
         <Link
           href="/blog"
           className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:underline mb-8"
@@ -73,14 +73,13 @@ export default function BlogForm() {
           <ArrowLeft size={18} /> Back to Feed
         </Link>
 
-        {/* Form Card */}
         <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-2xl p-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-600 to-purple-600 mb-8">
            {post?.edit?"Edit":"create New"}{" "}Post
           </h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Title Field */}
+   
             <div>
               <label
                 htmlFor="title"
@@ -105,7 +104,6 @@ export default function BlogForm() {
               )}
             </div>
 
-            {/* Content Field */}
             <div>
               <label
                 htmlFor="content"
@@ -131,9 +129,7 @@ export default function BlogForm() {
               )}
             </div>
 
-         
-
-            {/* Submit Button */}
+    
             <div className="flex justify-end">
               <button
                 type="submit"

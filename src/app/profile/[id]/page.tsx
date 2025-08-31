@@ -24,7 +24,7 @@ export default function EditProfilePage() {
   const { user, isAuthenticated,loginUser  } = useUser();
 
     const router=useRouter()
-  const params = useParams(); // ✅ Get route params
+  const params = useParams(); 
   const id = params?.id as string;
      const { data,  error } = useQuery({
     queryKey: ["profile"],

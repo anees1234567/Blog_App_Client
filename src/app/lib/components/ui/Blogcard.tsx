@@ -42,7 +42,7 @@ const { setCurrentPost } = usePost();
 
   return (
     <div className="group relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-2xl shadow-xl overflow-hidden p-6 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl hover:shadow-indigo-400/30">
-      {/* Gradient decoration */}
+
       <div className="absolute inset-0 bg-gradient-to-tr from-indigo-100 via-transparent to-pink-100 dark:from-indigo-900/20 dark:to-pink-900/20 opacity-60 pointer-events-none" />
 
       <div className="relative z-10">
@@ -58,7 +58,7 @@ const { setCurrentPost } = usePost();
       </div>
 
       <div className="relative z-10 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4 mt-auto">
-        {/* Author */}
+
         <div
           
           className="flex items-center gap-3 hover:opacity-80 transition"
