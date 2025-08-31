@@ -32,6 +32,8 @@ export default function LoginPage() {
    const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:any)=>{
         if(data?.responseIndicator=="success"){
             loginUser(data?.response)
+             document.cookie = `accessToken=${data?.response?.accessToken}; path=/; max-age=86400; secure; samesite=lax`;
+             console.log("Cookie set:", document.cookie);
             router.push("/blog")
         }else{
             toast.error("user Login failed")
