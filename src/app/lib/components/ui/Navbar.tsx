@@ -48,6 +48,17 @@ export default function Navbar() {
         >
           LogOut
         </Link>
+
+    
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/20">
+            <img
+              src={user?.avatar}
+              alt={user?.name}
+              className="w-8 h-8 rounded-full object-cover border border-white/50"
+            />
+            <span className="text-sm font-medium text-white">{user?.name}</span>
+          </div>
+
       </div>
     </nav>
   );

@@ -85,7 +85,7 @@ export default function BlogDetailsPage() {
                         />
                         <div>
                             <Link href={`/user/${post?.author._id}`} className="font-medium hover:underline">
-                                {user?.name}
+                                {post?.author.name as string}
                             </Link>
                             <div className="flex items-center gap-2 text-sm">
                                 <Calendar size={14} />
