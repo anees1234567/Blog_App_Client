@@ -21,12 +21,12 @@ npm run dev
 - profile Management (CRUD)
 - blog Management (CRUD)
 
-packages used 
-# Next Js
-# Mui
-# tanstac query
-# redux toolkit
-# react hook forms
-# React toastify
-# Axios 
-# Tailwind css
+# packages used 
+- Next Js
+- Mui
+- tanstac query
+- redux toolkit
+- react hook forms
+- React toastify
+- Axios 
+- Tailwind css
