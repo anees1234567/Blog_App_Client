@@ -29,9 +29,13 @@ export default function LoginPage() {
     },
   });
 
-   const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:userType)=>{
-        loginUser(data)
-        router.push("/")
+   const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:any)=>{
+        if(data?.responseIndicator=="cuccess"){
+            loginUser(data?.response)
+            router.push("/")
+        }else{
+            toast.error("user Login failed")
+        }
    },onError:()=>{
       toast.error("user Login failed")
    }

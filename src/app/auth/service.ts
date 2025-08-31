@@ -1,12 +1,15 @@
 import { ENDPOINTS, Instance } from "@/constants";
 
+import { userType } from "./type";
+import { ResponseType } from "../lib/GlobalType/type";
 
-export async function loginService(body:{email: string, password: string}) {
+
+export async function loginService(body:{email: string, password: string}): Promise<ResponseType<userType>|undefined> {
   try {
       const result = await Instance.post(`${ENDPOINTS.LOGIN}`,body,{
         withCredentials: true
       });
-      return result.data.response
+      return result.data
   } catch (error) {
     console.error("Login error:", error);
   }
