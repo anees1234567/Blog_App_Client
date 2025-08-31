@@ -30,7 +30,7 @@ export default function LoginPage() {
   });
 
    const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:any)=>{
-        if(data?.responseIndicator=="cuccess"){
+        if(data?.responseIndicator=="success"){
             loginUser(data?.response)
             router.push("/")
         }else{
