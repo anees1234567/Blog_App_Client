@@ -5,8 +5,11 @@ import Link from "next/link";
 import { UserPlus, ArrowLeft } from "lucide-react";
 import { loginService, registerService } from "../service";
 import { useMutation } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+    const router=useRouter()
   const {
     register,
     handleSubmit,
@@ -19,7 +22,11 @@ export default function RegisterPage() {
     },
   });
 
-  const {mutate}=useMutation({mutationFn:registerService})
+  const {mutate}=useMutation({mutationFn:registerService,onSuccess:()=>{
+    toast.success("user registered successfully")
+    router.push("/auth/login")
+
+  }})
   const onSubmit = (data:{email:string,password:string,name:string}) => {
     mutate(data)
   };

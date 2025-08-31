@@ -4,7 +4,7 @@ export type saveBlogType = {
     title: string;
     content: string;
     authorId: string;
-    _id?: string;
+    id?: string;
 }
 
 export type BlogType = {
@@ -14,6 +14,7 @@ export type BlogType = {
     author:Author;
     createdAt: string;
     updatedAt: string;
+    edit?:boolean
 }
 export type BlogPost= {
   _id: string;

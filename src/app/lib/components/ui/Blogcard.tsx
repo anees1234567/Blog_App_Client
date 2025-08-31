@@ -36,6 +36,7 @@ const { setCurrentPost } = usePost();
       author,
       createdAt,
       updatedAt ,
+      edit:false
     });
   };
 
@@ -58,25 +59,21 @@ const { setCurrentPost } = usePost();
 
       <div className="relative z-10 flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4 mt-auto">
         {/* Author */}
-        <Link
-          href={`/user/${author._id}`}
+        <div
+          
           className="flex items-center gap-3 hover:opacity-80 transition"
         >
-          {author.avatar ? (
+          {author.avatar && (
             <img
               src={author.avatar}
               alt={author.name}
               className="w-10 h-10 rounded-full object-cover shadow-md"
             />
-          ) : (
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-pink-400 flex items-center justify-center text-white font-semibold">
-              {author.name[0]}
-            </div>
-          )}
+          ) }
           <span className="text-sm font-medium text-gray-800 dark:text-gray-200">
             {author.name}
           </span>
-        </Link>
+        </div>
 
         {/* Date */}
         <div className="flex flex-col text-right text-xs text-gray-500 dark:text-gray-400">

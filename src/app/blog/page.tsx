@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Pagination from "@mui/material/Pagination";
 import BlogCard from "@/components/ui/Blogcard";
@@ -12,9 +12,11 @@ export default function BlogPagination() {
   const postsPerPage = 6;
 
 
-  const { data,  error } = useQuery({
+  const { data,  error ,refetch} = useQuery({
     queryKey: ["blogs", page],
     queryFn: () => getAllBlogPosts({ page, limit: postsPerPage }),
+     refetchOnMount: true, 
+    refetchOnWindowFocus: true,
   });
 
   const totalPages = Math.ceil((data?.totalCount || 0) / postsPerPage) || 1;
@@ -24,6 +26,10 @@ export default function BlogPagination() {
     setPage(newPage);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  useEffect(() => {
+  refetch(); 
+}, [ refetch]);
 
 
 

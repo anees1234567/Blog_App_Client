@@ -6,10 +6,11 @@ import { useUser } from "@/app/lib/hooks/useUser";
 import { useQuery } from "@tanstack/react-query";
 import { getAllBlogPosts } from "./service";
 import { usePost } from "../lib/hooks/usePost";
+import { useEffect } from "react";
 
 export default function ProfilePage() {
   const { user, isAuthenticated } = useUser();
-  const {setCurrentPost}=usePost()
+  const {setCurrentPost,post}=usePost()
 
     const { data=[],  error } = useQuery({
     queryKey: ["blogs"],
@@ -20,6 +21,10 @@ export default function ProfilePage() {
   if (!isAuthenticated || !user) {
     return <div className="text-center text-red-500">Please log in to view your profile.</div>;
   }
+
+  useEffect(()=>{
+      console.log(post)
+  },[])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10">
@@ -33,7 +38,7 @@ export default function ProfilePage() {
 
         <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-2xl p-10 md:p-14 max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-rounded scroll-smooth">
           <Link
-            href="/profile/edit"
+            href={`/profile/${user.id}`}
             className="absolute top-6 right-6 text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 transition"
             aria-label="Edit Profile"
           >

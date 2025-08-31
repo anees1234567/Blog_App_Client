@@ -3,6 +3,8 @@ import { ReactQueryClientProvider } from "./lib/providers/queryclientprovider";
 import ReduxProvider from "./lib/providers/reduxprovider";
 import { useUser } from "./lib/hooks/useUser";
 import NavbarWrapper from "./lib/components/Wrappers/NavbarWrapper";
+import ToastProvider from "./lib/providers/toastprovider";
+
 
 
 
@@ -13,8 +15,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
        
       <ReduxProvider>
         <ReactQueryClientProvider>
-           <NavbarWrapper/>
-            {children}
+           <ToastProvider>
+            <NavbarWrapper/>
+             {children}
+           </ToastProvider>
         </ReactQueryClientProvider>
       </ReduxProvider>
       </body>

@@ -8,13 +8,15 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/app/lib/hooks/useUser";
 import { userType } from "../type";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 
 
 
 export default function LoginPage() {
     const router = useRouter();
-    const {loginUser,isAuthenticated}=useUser()
+    const {loginUser,isAuthenticated,logoutUser}=useUser()
 
   const {
     register,
@@ -29,16 +31,19 @@ export default function LoginPage() {
 
    const {mutate}=useMutation({mutationFn:loginService,onSuccess:(data:userType)=>{
         loginUser(data)
-     
         router.push("/")
    },onError:()=>{
-
+      toast.error("user Login failed")
    }
 })
 
   const onSubmit = (data:{email:string,password:string}) => {
     mutate(data)
   };
+
+  useEffect(()=>{
+    logoutUser()
+  },[])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-pink-100 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 py-16 px-6 sm:px-10 flex items-center justify-center">

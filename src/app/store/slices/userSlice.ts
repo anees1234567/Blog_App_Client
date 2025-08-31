@@ -6,7 +6,7 @@ interface User {
   email: string;
   avatar?: string;
   bio?: string;
-  role: 'Reader' | 'Author' | 'Admin';
+  role: 'Reader' | 'User' | 'Admin';
 
 }
 

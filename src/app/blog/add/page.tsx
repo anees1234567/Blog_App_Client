@@ -9,6 +9,8 @@ import { saveBlogType } from "../type";
 import { useUser } from "@/app/lib/hooks/useUser";
 import { usePost } from "@/app/lib/hooks/usePost";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 
 
@@ -16,6 +18,7 @@ export default function BlogForm() {
 
   const {user}=useUser()
   const {post,clearCurrentPost}=usePost()
+  const router=useRouter()
 
   const {
     register,
@@ -30,26 +33,28 @@ export default function BlogForm() {
   });
 
   const {mutate}=useMutation({mutationFn:createBlogPost,onSuccess:()=>{
+    toast.success("success")
     clearCurrentPost()
+    router.push("/blog")
   }})
 
   const onSubmit = (data:{title:string,content:string}) => {
     const body:saveBlogType={
       title:data.title,
-      authorId:post?.author._id as string,
-      content:data?.content
+      authorId:user?.id as string,
+      content:data?.content,
+      id:post?._id
     }
     mutate(body)
   };
 
     useEffect(() => {
-
-    console.log(post?._id)
-    reset({
+      if(post?.edit){
+           reset({
       content: post?.content,
       title: post?.title,
     });
-
+      }
   return () => {
     clearCurrentPost()
     reset({})
@@ -71,7 +76,7 @@ export default function BlogForm() {
         {/* Form Card */}
         <div className="relative bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-3xl shadow-2xl p-10">
           <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-pink-600 to-purple-600 mb-8">
-           {post?._id?"Edit":"create New"}{" "}Post
+           {post?.edit?"Edit":"create New"}{" "}Post
           </h1>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
