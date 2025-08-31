@@ -46,7 +46,6 @@ if (!isAuthenticated || user?.role !== "Admin") {
   };
 
   const handleDelete = (id: string) => {
-    console.log("Delete user:", id);
     deleteUser({id:id,isDeleted:true})
   };
 

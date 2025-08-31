@@ -1,5 +1,5 @@
 import { ENDPOINTS, Instance } from "@/constants";
-import { BlogType, saveBlogType } from "./type";
+import { BlogType, CommentTypeList, saveBlogType } from "./type";
 
 Instance
 export async function createBlogPost(data:saveBlogType) {
@@ -24,7 +24,7 @@ export async function createComment(body: { postId: string; commentText: string,
     return response.data;
 }
 
-export async function getComments(postId: string): Promise<{ _id: string; content: string; poster: { _id: string; name: string; avatar?: string | undefined; }; createdAt: string; }[]> {
+export async function getComments(postId: string): Promise<CommentTypeList[]> {
     const response = await Instance.get(`${ENDPOINTS.GET_COMMENTS}/${postId}`);
     return response.data.response;
 }

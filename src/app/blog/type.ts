@@ -1,4 +1,4 @@
-import { userType } from "../auth/type";
+
 
 export type saveBlogType = {
     title: string;
@@ -30,4 +30,14 @@ export type Author= {
   name: string;
   email: string;
   avatar?: string;
+}
+export type CommentTypeList = {
+    _id: string;
+    content: string;
+    poster: {
+        _id: string;
+        name: string;
+        avatar?: string | undefined;
+    };
+    createdAt: string;
 }
