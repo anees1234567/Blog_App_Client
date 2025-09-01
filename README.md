@@ -30,3 +30,6 @@ npm run dev
 - React toastify
 - Axios 
 - Tailwind css
+
+# environmental variable
+- NEXT_PUBLIC_API_URL=https://blog-app-server-yrjy.onrender.com/
